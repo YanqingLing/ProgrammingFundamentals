@@ -39,7 +39,7 @@ public class WordCount {
 
     //Print the total number of words found
     public Integer wordCount(ArrayList<String> lines) {
-        int sum = 0;
+        int sum = 1;
         for(String line : lines) {
             String[] words = line.split("\\W+");
             sum = sum + words.length;
