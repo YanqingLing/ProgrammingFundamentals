@@ -2,10 +2,7 @@ package com.ling.shoppingCart;
 
 import com.ling.datastructure.EnhancedShoppingApplication;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class ToyShoppingCart {
@@ -40,9 +37,6 @@ public class ToyShoppingCart {
 
 
         EnhancedShoppingApplication methods = new EnhancedShoppingApplication();
-        //HashMap<String, String> productDescription = methods.productDescriptionMap(products);
-        //HashMap<String, Double> productPrices = methods.productPricesMap(products);
-        //HashMap<String, Integer> productInventory = methods.inventoryMap(products);
         ArrayList<Double> prices = new ArrayList<Double>();
 
         ToyShoppingCart shopping = new ToyShoppingCart();
@@ -51,7 +45,6 @@ public class ToyShoppingCart {
         Scanner userInput = new Scanner(System.in);
         boolean quit = false;
         int count = 0;
-
 
         while(!quit){
             System.out.println("Enter your choice: ");
@@ -64,29 +57,28 @@ public class ToyShoppingCart {
                 case 0:
                     shopping.printInstructions();
                     break;
-                case 1:
-                    shopping.printShoppingCart(shoppingCart);
 
-                    break;
-                case 2:
+                case 1:
                     item = shopping.getItem();
                     if(productInventory.containsKey(item) && productInventory.get(item) >= 1) {
                         shoppingCart.add(item);
                     } else {
                         System.out.println("Item is not available.");
                     }
-
                     inventory = productInventory.get(item);
                     productInventory.put(item, inventory - 1);
                     prices.add(productPrices.get(item));
+                    shopping.printShoppingCart(shoppingCart);
                     break;
-                case 3:
+                case 2:
                     item = shopping.getItem();
                     inventory = productInventory.get(item);
                     shoppingCart.remove(item);
                     productInventory.put(item, inventory + 1);
+                    System.out.println("Item is removed successfully!");
+                    shopping.printShoppingCart(shoppingCart);
                     break;
-                case 4:
+                case 3:
                     quit = true;
                     System.out.println("The items that you bought: " + shoppingCart);
                     double sum = 0;
@@ -94,8 +86,14 @@ public class ToyShoppingCart {
                         sum = sum + price;
                     }
                     System.out.println("Your final bill is: " + sum);
-
+                    Set<String> toys = productInventory.keySet();
+                    for(String toy : toys) {
+                        System.out.println(toy + ": " + productDescription.get(toy) + ", price is $"+ productPrices.get(toy) + " and inventory is " + productInventory.get(toy));
+                    }
                     break;
+
+                default:
+                    System.out.println("Your input is invalid");
 
             }
         }
@@ -107,10 +105,9 @@ public class ToyShoppingCart {
 
     public void printInstructions(){
         System.out.println("Press 0 - to print choice option");
-        System.out.println("Press 1 - to print your shopping cart items");
-        System.out.println("Press 2 - to add item to your shopping cart");
-        System.out.println("Press 3 - to remove an item from your shopping cart");
-        System.out.println("Press 4 - to check out");
+        System.out.println("Press 1 - to add item to your shopping cart");
+        System.out.println("Press 2 - to remove an item from your shopping cart");
+        System.out.println("Press 3 - to check out");
     }
 
 
