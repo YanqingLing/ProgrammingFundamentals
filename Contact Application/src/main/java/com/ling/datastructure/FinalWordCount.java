@@ -16,7 +16,7 @@ public class FinalWordCount {
         lines.add("A limit has been set to human life, which cannot be overstepped");
         lines.add("Well, what makes you go to war?");
 
-        WordCount countWords = new WordCount();
+        FinalWordCount countWords = new FinalWordCount();
         ArrayList<String> allWords = new ArrayList<>();
 
         for(String line : lines) {
